@@ -1,0 +1,84 @@
+{
+  "logger": {
+    "level": "info",
+    "timestamp": false
+  },
+  "esclient": {
+    "hosts": [{
+      "host": "elasticsearch"
+    }]
+  },
+  "elasticsearch": {
+    "settings": {
+      "index": {
+        "refresh_interval": "10s",
+        "number_of_replicas": "0",
+        "number_of_shards": "1"
+      }
+    }
+  },
+  "api": {
+    "textAnalyzer": "libpostal",
+    "services": {
+      "placeholder": {
+        "url": "http://placeholder:4100"
+      },
+      "libpostal": {
+        "url": "http://libpostal:8080"
+      },
+      "pip": {
+        "url": "http://pip-service:4200"
+      },
+      "interpolation": {
+        "url": "http://interpolation:4300"
+      }
+    }
+  },
+  "imports": {
+    "adminLookup": {
+      "enabled": true
+    },
+    "geonames": {
+      "datapath": "/data/geonames",
+      "countryCode": "ALL"
+    },
+    "openstreetmap": {
+      "download": [
+        {
+          "sourceURL": "https://s3.amazonaws.com/metro-extracts.nextzen.org/boston_massachusetts.osm.pbf"
+        }
+      ],
+      "leveldbpath": "/tmp",
+      "datapath": "/data/openstreetmap",
+      "import": [{
+        "filename": "boston_massachusetts.osm.pbf"
+      }]
+    },
+    "openaddresses": {
+      "datapath": "/data/openaddresses",
+      "files": [ "us/ma/city_of_boston.csv" ]
+    },
+    "polyline": {
+      "datapath": "/data/polylines",
+      "files": [ "extract.0sv" ]
+    },
+    "whosonfirst": {
+      "datapath": "/data/whosonfirst",
+      "importVenues": false,
+      "importPostalcodes": true,
+      "importPlace": "85950361"
+    },
+    "interpolation": {
+      "download": {
+        "tiger": {
+          "datapath": "/data/tiger",
+          "states": [
+            {
+              "state_code": 25
+            }
+          ]
+        }
+      }
+    }
+  }
+}
